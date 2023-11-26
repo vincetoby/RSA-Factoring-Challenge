@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+check_factor()
+{
+	if [ $# -ne 3 ];
+        then
+		counter=0
+		numb2=1
+                args=("$@")
+                for i in ${args[*]};
+                do
+                        if [ $counter -gt 1 ];
+                        then
+                                numb2=$(echo $i*$numb2 | bc)
+                        fi
+                        counter=$((counter + 1))
+                done
+        else
+                numb2=$3
+        fi
+
+        numb1=$2
+        numb=$(echo "$1" | tr ':' '=')
+
+        result=$(echo "if($numb2 > $numb1) 1 else 0" | bc)
+	        if ((result == 1)); then
+		        numbcp=$numb1
+		        numb1=$numb2
+		        numb2=$numbcp
+                fi
+
+        echo "$numb$numb1*$numb2"
+}
+
+if [ $# -ne 1 ]
+then
+        echo 'Usage: rsa <file>'
+        exit 1
+else
+
+        while read i
+        do
+
+                result=$(factor "$i")
+                check_factor $result
+
+        done < "$1"
+fi
