@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check_factor()
+check_factorial()
 {
 	if [ $# -ne 3 ];
         then
@@ -42,7 +42,7 @@ else
         do
 
                 result=$(factor "$i")
-                check_factor $result
+                check_factorial $result
 
         done < "$1"
 fi
