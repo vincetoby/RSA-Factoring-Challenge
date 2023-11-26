@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-check_factorial()
+check_factor()
 {
 	if [ $# -ne 3 ];
         then
@@ -34,7 +34,7 @@ check_factorial()
 
 if [ $# -ne 1 ]
 then
-        echo 'Usage: factor <file>'
+        echo 'Usage: rsa <file>'
         exit 1
 else
 
@@ -42,7 +42,7 @@ else
         do
 
                 result=$(factor "$i")
-                check_factorial $result
+                check_factor $result
 
         done < "$1"
 fi
